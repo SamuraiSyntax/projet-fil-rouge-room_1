@@ -1,5 +1,6 @@
+package pfr.buycar;
 
-public class MainApplication {
+public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
