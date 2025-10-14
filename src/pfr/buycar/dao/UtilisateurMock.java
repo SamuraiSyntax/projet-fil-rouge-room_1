@@ -23,7 +23,7 @@ public abstract class UtilisateurMock {
 		this.prenom = prenom;
 		this.compte = compte;
 		this.password = password;
-		this.setRole(role);
+		this.role = role;
 		this.email = email;
 	}
 	

@@ -5,6 +5,8 @@ import java.sql.SQLException;
 
 import pfr.buycar.dao.DBConnection;
 import pfr.buycar.dao.UtilisateurDao;
+import pfr.buycar.dao.VoitureDao;
+import pfr.buycar.dao.VoitureMock;
 import pfr.buycar.dao.clientMock;
 
 public class Main {
@@ -25,7 +27,11 @@ public class Main {
 		
 		UtilisateurDao userTest = new UtilisateurDao(conn);
 		
-		userTest.create(new clientMock("Dupont", "Serge", "sdupont", "12345", 2, "serge@exemple.com"));
+		userTest.create(new clientMock("Pierre", "Jean", "pjean", "14485", 2, "pjean@exemple.com"));
+		
+		VoitureDao voitureTest = new VoitureDao(conn);
+		
+		voitureTest.create(new VoitureMock("SUV004", "Toyota", "RAV4", 2010, "Rouge", 15000, 3));
 		
 			
 		// Methode getAll à définir dans l'interface CRUD
