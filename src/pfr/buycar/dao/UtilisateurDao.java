@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UtilisateurDao implements CRUDable<UtilisateurMock> {
+import pfr.buycar.models.Client;
+
+public class UtilisateurDao implements CRUDable<Client> {
 
 	// private static final List<UtilisateurMock> utilisateurs = new ArrayList<>();
 
@@ -17,7 +19,7 @@ public class UtilisateurDao implements CRUDable<UtilisateurMock> {
 	}
 
 	@Override
-	public boolean create(UtilisateurMock user) {
+	public boolean create(Client user) {
 
 		String sql = "INSERT INTO Utilisateur (nom, prenom, nom_compte, mot_de_passe, id_role, email) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -38,14 +40,14 @@ public class UtilisateurDao implements CRUDable<UtilisateurMock> {
 	}
 
 	@Override
-	public UtilisateurMock read(int id) {
+	public Client read(int id) {
 		String sql = "SELECT * FROM Utilisateur WHERE id_user = ?";
 		try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				clientMock user = new clientMock(rs.getString("nom"), rs.getString("prenom"),
+				Client user = new Client(rs.getString("nom"), rs.getString("prenom"),
 						rs.getString("nom_compte"), rs.getString("mot_de_passe"), rs.getInt("id_role"),
 						rs.getString("email"));
 
@@ -58,9 +60,25 @@ public class UtilisateurDao implements CRUDable<UtilisateurMock> {
 		}
 		return null;
 	}
+	
+	// Vérifie si un utilisateur existe 
+	public boolean isUserExist(String compte, String password) {
+	    String sql = "SELECT id_user FROM Utilisateur WHERE nom_compte = ? AND mot_de_passe = ?";
+	    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+	        stmt.setString(1, compte);
+	        stmt.setString(2, password);
+	        ResultSet rs = stmt.executeQuery();
+
+	        return rs.next(); // retourne vrai si trouvé
+
+	    } catch (SQLException e) {
+	        System.err.println("Erreur lors de la vérification de l'utilisateur : " + e.getMessage());
+	    }
+	    return false;
+	}
 
 	@Override
-	public boolean update(UtilisateurMock obj) {
+	public boolean update(Client obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -72,7 +90,7 @@ public class UtilisateurDao implements CRUDable<UtilisateurMock> {
 	}
 
 	@Override
-	public List<UtilisateurMock> getAll() {
+	public List<Client> getAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

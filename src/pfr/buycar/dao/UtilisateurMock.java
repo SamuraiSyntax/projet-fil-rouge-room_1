@@ -38,12 +38,7 @@ public abstract class UtilisateurMock {
     public String getEmail() { return email; }
     
     
-    
-    public void setId(int id) {
-		this.id = id;
-	}
-
-
+    public void setId(int id) { this.id = id; }
 	public void setNom(String nom) { this.nom = nom; }
     public void setPrenom(String prenom) { this.prenom = prenom; }
     public void setCompte(String compte) { this.compte = compte; }

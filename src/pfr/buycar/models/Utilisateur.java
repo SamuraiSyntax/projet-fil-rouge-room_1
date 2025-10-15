@@ -1,73 +1,44 @@
 package pfr.buycar.models;
 
-import java.util.Objects;
-
 public abstract class Utilisateur {
 	
 	private int id;
 	private String nom;
+	private String prenom;
+	private String compte;
 	private String email;
 	private String password;
-	private String role;
+	private int role;
 	private String telephone;
 	
-	public Utilisateur(int id, String nom, String email, String password, String role, String telephone) {
-		super();
-		this.id = id;
+	public Utilisateur(String nom, String prenom, String compte,String password,int role, String email) {
 		this.nom = nom;
-		this.email = email;
+		this.prenom = prenom;
+		this.compte = compte;
 		this.password = password;
 		this.role = role;
-		this.telephone = telephone;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
+	//Getter et Setter
+	public int getId() { return id; }
+    public String getNom() { return nom; }
+    public String getPrenom() { return prenom; }
+    public String getcompte() { return compte; }
+    public String getpassword() { return password; }
+    public int getRole() { return role; }
+    public String getEmail() { return email; }
+    
+    
+    public void setId(int id) { this.id = id; }
+	public void setNom(String nom) { this.nom = nom; }
+    public void setPrenom(String prenom) { this.prenom = prenom; }
+    public void setCompte(String compte) { this.compte = compte; }
+    public void setPassword(String password) { this.password = password; }
+    public void setRole(int role) { this.role = role; }
+    public void setEmail(String email) { this.email = email; }
+    
+    
 
 	@Override
 	public String toString() {
