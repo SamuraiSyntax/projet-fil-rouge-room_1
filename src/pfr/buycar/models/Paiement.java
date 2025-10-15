@@ -80,47 +80,8 @@ public class Paiement implements IPayable {
         this.commande = commande;
     }
 
-    // --- Méthodes utilitaires ---
-    /**
-     * Calcule le montant final du paiement après application de la remise.
-     * @return le montant total après réduction
-     */
-    public float calculerMontantFinal() {
-        if (commande == null) return 0f;
-        float total = commande.calculerTotal();
-        if (remise > 0) {
-            total -= (total * (remise / 100f));
-        }
-        return total;
-    }
-
-    // --- Implémentation de IPayable ---
-    @Override
-    public boolean effectuerPaiement() {
-        if (commande == null) {
-            System.out.println("⚠️ Aucune commande associée au paiement !");
-            etat = "Échoué";
-            return false;
-        }
-
-        float montant = calculerMontantFinal();
-        if (montant <= 0) {
-            System.out.println("⚠️ Montant invalide : " + montant + " € — paiement refusé.");
-            etat = "Échoué";
-            return false;
-        }
-
-        // Simulation d'un paiement réussi
-        this.date_paiement = new Date();
-        this.etat = "Réussi";
-
-        System.out.println("✅ Paiement effectué avec succès !");
-        System.out.println("Méthode : " + methode);
-        System.out.println("Montant payé : " + montant + " €");
-        return true;
-    }
-
-    // --- toString ---
+     
+       // --- toString ---
     @Override
     public String toString() {
         return "Paiement{" +
@@ -132,5 +93,11 @@ public class Paiement implements IPayable {
                 ", commande_id=" + (commande != null ? commande.getId_commande() : "null") +
                 '}';
     }
+
+	@Override
+	public boolean effectuerPaiement() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
 
