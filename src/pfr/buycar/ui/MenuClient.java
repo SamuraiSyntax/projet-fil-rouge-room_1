@@ -43,7 +43,7 @@ public class MenuClient {
 			case 0 -> {
 				System.out.println(
 						connecte ? Icons.DECONNEXION + " Déconnexion..." : Icons.RETOUR + " Retour au menu précédent");
-				continuer = false; // Sort de la boucle et revient au menu principal
+				continuer = false;
 			}
 			default -> System.out.println(Icons.ATTENTION + " Choix invalide.");
 			}

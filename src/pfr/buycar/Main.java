@@ -1,17 +1,16 @@
 package pfr.buycar;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
-import pfr.buycar.dao.UtilisateurDao;
-import pfr.buycar.dao.VoitureDao;
-import pfr.buycar.dao.VoitureMock;
-import pfr.buycar.dao.clientMock;
-import pfr.buycar.utils.DBConnection;
+import pfr.buycar.ui.MenuPrincipal;
 
 public class Main {
 
 	public static void main(String[] args) throws SQLException {
+<<<<<<< HEAD
+		
+		MenuPrincipal.afficher();
+=======
 
 		System.out.println("===Test de la connexion à la base de données===");
 
@@ -30,12 +29,7 @@ public class Main {
 		userTest.create(new clientMock("Pierre", "Jean", "pjean", "14485", 2, "pjean@exemple.com"));
 
 		VoitureDao voitureTest = new VoitureDao(conn);
+>>>>>>> 596041c (maj main)
 
-		voitureTest.create(new VoitureMock("SUV004", "Toyota", "RAV4", 2010, "Rouge", 15000, 3));
-
-		// Methode getAll à définir dans l'interface CRUD
-		// System.out.println("Utilisateurs : " + userTest.getAll());
-
-		DBConnection.closeConnection();
 	}
 }

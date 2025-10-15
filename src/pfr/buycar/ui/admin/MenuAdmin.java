@@ -1,12 +1,19 @@
 package pfr.buycar.ui.admin;
 
 import static pfr.buycar.utils.InputUtils.lireEntier;
+
+import java.sql.Connection;
 import java.util.Scanner;
+
+import pfr.buycar.dao.UtilisateurDao;
+import pfr.buycar.dao.VoitureDao;
 import pfr.buycar.utils.Icons;
 
 public class MenuAdmin {
 
-	public static void afficher(Scanner sc) {
+	public static void afficher(Scanner sc, Connection conn) {
+	    UtilisateurDao userDao = new UtilisateurDao(conn);
+	    VoitureDao voitureDao = new VoitureDao(conn);
 		int choix;
 		boolean continuer = true;
 
