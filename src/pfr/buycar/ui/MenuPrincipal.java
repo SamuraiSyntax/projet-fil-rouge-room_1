@@ -1,9 +1,7 @@
 package pfr.buycar.ui;
 
 import static pfr.buycar.utils.InputUtils.lireEntier;
-
 import java.util.Scanner;
-
 import pfr.buycar.utils.Icons;
 
 public class MenuPrincipal {

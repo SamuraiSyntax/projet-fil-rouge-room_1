@@ -1,7 +1,7 @@
-package pfr.buycar.ui;
+package pfr.buycar.ui.admin;
 
-import java.util.Scanner;
 import static pfr.buycar.utils.InputUtils.lireEntier;
+import java.util.Scanner;
 import pfr.buycar.utils.Icons;
 
 public class MenuAdmin {
@@ -21,12 +21,12 @@ public class MenuAdmin {
 			choix = lireEntier(sc);
 
 			switch (choix) {
-			case 1 -> System.out.println("👥 Gestion des utilisateurs (à venir)");
-			case 2 -> System.out.println("🚗 Gestion des voitures (à venir)");
-			case 3 -> System.out.println("📦 Gestion des commandes (à venir)");
+			case 1 -> MenuAdminUtilisateur.afficher(sc);
+			case 2 -> MenuAdminVoiture.afficher(sc);
+			case 3 -> MenuAdminCommande.afficher(sc);
 			case 0 -> {
 				System.out.println(Icons.DECONNEXION + " Déconnexion...");
-				continuer = false; // Sort de la boucle pour revenir au menu principal
+				continuer = false;
 			}
 			default -> System.out.println(Icons.ATTENTION + " Choix invalide.");
 			}

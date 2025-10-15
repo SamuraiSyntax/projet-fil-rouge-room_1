@@ -10,4 +10,5 @@ public class Icons {
 	public static final String VOITURE = "🚘";
 	public static final String ADMIN = "👤";
 	public static final String CLIENT = "🧑";
+    public static final String DELETE = "🗑️ "; 
 }

@@ -1,6 +1,8 @@
 package pfr.buycar.ui;
 
 import java.util.Scanner;
+
+import pfr.buycar.ui.admin.MenuAdmin;
 import pfr.buycar.utils.Icons;
 
 public class MenuConnexion {
