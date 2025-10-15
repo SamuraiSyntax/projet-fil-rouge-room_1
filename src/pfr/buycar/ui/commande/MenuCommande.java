@@ -1,37 +1,47 @@
-package pfr.buycar.ui;
+package pfr.buycar.ui.commande;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import pfr.buycar.Panier;
-import static pfr.buycar.utils.InputUtils.lireEntier;
+import pfr.buycar.ui.AbstractMenu;
+import pfr.buycar.ui.panier.MenuPanier;
 import pfr.buycar.utils.Icons;
 
-public class MenuCommande {
+public class MenuCommande extends AbstractMenu {
 
 	private static final List<String> commandes = new ArrayList<>();
-
-	public static void afficher(Scanner sc) {
-		int choix;
-		do {
-			System.out.println("\n===== MENU COMMANDES =====");
-			System.out.println("1️⃣  Voir mes commandes");
-			System.out.println("2️⃣  Passer une nouvelle commande");
-			System.out.println("0️⃣  Retour");
-			System.out.print(Icons.FLECHE + " Votre choix : ");
-
-			choix = lireEntier(sc);
-
-			switch (choix) {
-			case 1 -> afficherCommandes();
-			case 2 -> passerCommande();
-			case 0 -> System.out.println(Icons.RETOUR + " Retour au menu précédent...");
-			default -> System.out.println(Icons.ATTENTION + " Choix invalide.");
-			}
-		} while (choix != 0);
+	
+	public MenuCommande(Scanner scanner) {
+		super(scanner, "MENU COMMANDES");
+	}
+	
+	public static MenuCommande getInstance(Scanner scanner) {
+		return new MenuCommande(scanner);
 	}
 
-	private static void afficherCommandes() {
+	@Override
+	protected void afficherOptions() {
+		System.out.println("1️⃣  Voir mes commandes");
+		System.out.println("2️⃣  Passer une nouvelle commande");
+		System.out.println("0️⃣  Retour");
+	}
+	
+	@Override
+	protected boolean traiterChoix(int choix) {
+		switch (choix) {
+		case 1 -> afficherCommandes();
+		case 2 -> passerCommande();
+		case 0 -> {
+			afficherRetour();
+			return false;
+		}
+		default -> afficherChoixInvalide();
+		}
+		return true;
+	}
+
+	private void afficherCommandes() {
 		if (commandes.isEmpty()) {
 			System.out.println(Icons.ATTENTION + " Vous n'avez aucune commande.");
 			return;
@@ -43,7 +53,7 @@ public class MenuCommande {
 		}
 	}
 
-	private static void passerCommande() {
+	private void passerCommande() {
 		Panier panier = MenuPanier.getPanier();
 		if (panier.estVide()) {
 			System.out.println(Icons.ATTENTION + " Votre panier est vide !");
