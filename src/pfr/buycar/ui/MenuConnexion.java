@@ -1,5 +1,6 @@
 package pfr.buycar.ui;
 
+import java.sql.Connection;
 import java.util.Scanner;
 
 import pfr.buycar.ui.admin.MenuAdmin;
@@ -7,7 +8,7 @@ import pfr.buycar.utils.Icons;
 
 public class MenuConnexion {
 
-	public static String[] afficher(Scanner sc) {
+	public static String[] afficher(Scanner sc, Connection conn) {
 		System.out.println("\n===== CONNEXION =====");
 		System.out.print(Icons.ADMIN + " Nom d'utilisateur : ");
 		String login = sc.nextLine().trim();
@@ -17,7 +18,7 @@ public class MenuConnexion {
 
 		if (login.equalsIgnoreCase("admin") && mdp.equals("admin")) {
 			System.out.println("\n" + Icons.CHECK + " Connexion réussie en tant qu'ADMIN !");
-			MenuAdmin.afficher(sc);
+			MenuAdmin.afficher(sc, conn);
 			return new String[] { "admin", login };
 		} else if (login.equalsIgnoreCase("client") && mdp.equals("client")) {
 			System.out.println("\n" + Icons.CHECK + " Connexion réussie en tant que CLIENT !");
