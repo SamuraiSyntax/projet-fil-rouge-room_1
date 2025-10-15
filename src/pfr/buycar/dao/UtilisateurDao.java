@@ -5,10 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-
-
-
-
 public class UtilisateurDao implements CRUDable<UtilisateurMock>{
 	
 	//private static final List<UtilisateurMock> utilisateurs = new ArrayList<>();
