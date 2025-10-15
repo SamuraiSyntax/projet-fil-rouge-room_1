@@ -1,4 +1,4 @@
-package pfr.buycar.client;
+package pfr.buycar.models;
 
 import java.util.Objects;
 

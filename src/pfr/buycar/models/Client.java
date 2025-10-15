@@ -1,4 +1,4 @@
-package pfr.buycar.client;
+package pfr.buycar.models;
 
 public class Client extends Utilisateur{
 	

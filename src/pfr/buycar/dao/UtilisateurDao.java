@@ -9,6 +9,7 @@ import java.util.List;
 public class UtilisateurDao implements CRUDable<UtilisateurMock> {
 
 	// private static final List<UtilisateurMock> utilisateurs = new ArrayList<>();
+
 	private Connection connection;
 
 	public UtilisateurDao(Connection connection) {
@@ -38,29 +39,24 @@ public class UtilisateurDao implements CRUDable<UtilisateurMock> {
 
 	@Override
 	public UtilisateurMock read(int id) {
-		 String sql = "SELECT * FROM Utilisateur WHERE id_user = ?";
-	        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-	            stmt.setInt(1, id);
-	            ResultSet rs = stmt.executeQuery();
+		String sql = "SELECT * FROM Utilisateur WHERE id_user = ?";
+		try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
 
-	            if (rs.next()) {
-	                clientMock user = new clientMock(
-	                        rs.getString("nom"),
-	                        rs.getString("prenom"),
-	                        rs.getString("nom_compte"),
-	                        rs.getString("mot_de_passe"),
-	                        rs.getInt("id_role"),
-	                        rs.getString("email")
-	                );
-	                
-	                user.setId(rs.getInt("id_user")); //injection l'id après construction
-	                
-	                return user;
-	            }
-	        } catch (SQLException e) {
-	            System.err.println("Erreur de lecture : " + e.getMessage());
-	        }
-	        return null;		
+			if (rs.next()) {
+				clientMock user = new clientMock(rs.getString("nom"), rs.getString("prenom"),
+						rs.getString("nom_compte"), rs.getString("mot_de_passe"), rs.getInt("id_role"),
+						rs.getString("email"));
+
+				user.setId(rs.getInt("id_user")); // injection l'id après construction
+
+				return user;
+			}
+		} catch (SQLException e) {
+			System.err.println("Erreur de lecture : " + e.getMessage());
+		}
+		return null;
 	}
 
 	@Override
