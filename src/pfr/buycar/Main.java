@@ -3,11 +3,11 @@ package pfr.buycar;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import pfr.buycar.dao.DBConnection;
 import pfr.buycar.dao.UtilisateurDao;
 import pfr.buycar.dao.VoitureDao;
 import pfr.buycar.dao.VoitureMock;
 import pfr.buycar.dao.clientMock;
+import pfr.buycar.utils.DBConnection;
 
 public class Main {
 

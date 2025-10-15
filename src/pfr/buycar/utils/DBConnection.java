@@ -1,4 +1,4 @@
-package pfr.buycar.dao;
+package pfr.buycar.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
