@@ -29,6 +29,9 @@ public class Main {
 		
 		userTest.create(new clientMock("Pierre", "Jean", "pjean", "14485", 2, "pjean@exemple.com"));
 		
+		System.out.println(userTest.read(2));
+		
+		
 		VoitureDao voitureTest = new VoitureDao(conn);
 		
 		voitureTest.create(new VoitureMock("SUV004", "Toyota", "RAV4", 2010, "Rouge", 15000, 3));

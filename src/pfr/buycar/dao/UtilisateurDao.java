@@ -2,6 +2,7 @@ package pfr.buycar.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -40,8 +41,29 @@ public class UtilisateurDao implements CRUDable<UtilisateurMock>{
 
 	@Override
 	public UtilisateurMock read(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		 String sql = "SELECT * FROM Utilisateur WHERE id_user = ?";
+	        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+	            stmt.setInt(1, id);
+	            ResultSet rs = stmt.executeQuery();
+
+	            if (rs.next()) {
+	                clientMock user = new clientMock(
+	                        rs.getString("nom"),
+	                        rs.getString("prenom"),
+	                        rs.getString("nom_compte"),
+	                        rs.getString("mot_de_passe"),
+	                        rs.getInt("id_role"),
+	                        rs.getString("email")
+	                );
+	                
+	                user.setId(rs.getInt("id_user")); //injection l'id après construction
+	                
+	                return user;
+	            }
+	        } catch (SQLException e) {
+	            System.err.println("Erreur de lecture : " + e.getMessage());
+	        }
+	        return null;		
 	}
 
 	@Override
