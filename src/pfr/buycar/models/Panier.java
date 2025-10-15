@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import pfr.buycar.utils.ICalculable;
+
+
 /**
  * Classe représentant un panier d'achat dans le projet BuyCar.
- * Modèle simple sans logique métier.
+ * Implémente ICalculable pour calculer le total des voitures.
  */
-public class Panier {
+public class Panier implements ICalculable {
 
     // --- Attributs ---
     private int id_panier;
@@ -31,36 +34,28 @@ public class Panier {
     }
 
     // --- Getters / Setters ---
-    public int getId_panier() {
-        return id_panier;
-    }
+    public int getId_panier() { return id_panier; }
+    public void setId_panier(int id_panier) { this.id_panier = id_panier; }
 
-    public void setId_panier(int id_panier) {
-        this.id_panier = id_panier;
-    }
+    public Date getDate_creation() { return date_creation; }
+    public void setDate_creation(Date date_creation) { this.date_creation = date_creation; }
 
-    public Date getDate_creation() {
-        return date_creation;
-    }
+    public List<Voiture> getVoitures() { return voitures; }
+    public void setVoitures(List<Voiture> voitures) { this.voitures = voitures; }
 
-    public void setDate_creation(Date date_creation) {
-        this.date_creation = date_creation;
-    }
+    public Utilisateur getUtilisateur() { return utilisateur; }
+    public void setUtilisateur(Utilisateur utilisateur) { this.utilisateur = utilisateur; }
 
-    public List<Voiture> getVoitures() {
-        return voitures;
-    }
-
-    public void setVoitures(List<Voiture> voitures) {
-        this.voitures = voitures;
-    }
-
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
-    }
-
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
+    // --- Méthode de l'interface ICalculable ---
+    @Override
+    public float calculerTotal() {
+        float total = 0f;
+        if (voitures != null) {
+            for (Voiture v : voitures) {
+                total += v.getPrix();
+            }
+        }
+        return total;
     }
 
     // --- toString ---
@@ -70,6 +65,7 @@ public class Panier {
                 "id_panier=" + id_panier +
                 ", date_creation=" + date_creation +
                 ", nombre_voitures=" + (voitures != null ? voitures.size() : 0) +
+                ", total=" + calculerTotal() +
                 ", utilisateur=" + (utilisateur != null ? utilisateur.getNom() : "null") +
                 '}';
     }
