@@ -47,9 +47,8 @@ public class UtilisateurDao implements CRUDable<Client> {
 			ResultSet rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				Client user = new Client(rs.getString("nom"), rs.getString("prenom"),
-						rs.getString("nom_compte"), rs.getString("mot_de_passe"), rs.getInt("id_role"),
-						rs.getString("email"));
+				Client user = new Client(rs.getString("nom"), rs.getString("prenom"), rs.getString("nom_compte"),
+						rs.getString("mot_de_passe"), rs.getInt("id_role"), rs.getString("email"));
 
 				user.setId(rs.getInt("id_user")); // injection l'id après construction
 
@@ -60,21 +59,44 @@ public class UtilisateurDao implements CRUDable<Client> {
 		}
 		return null;
 	}
-	
-	// Vérifie si un utilisateur existe 
+
+	public Client findByLoginAndPassword(String compte, String password) {
+		String sql = "SELECT * FROM Utilisateur WHERE nom_compte = ? AND mot_de_passe = ?";
+		try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+			stmt.setString(1, compte);
+			stmt.setString(2, password);
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				Client user = new Client(rs.getString("nom"), rs.getString("prenom"), rs.getString("nom_compte"),
+						rs.getString("mot_de_passe"), rs.getInt("id_role"), rs.getString("email"));
+				user.setId(rs.getInt("id_user"));
+				
+				System.out.println(user.toString());
+				
+				return user;
+			}
+
+		} catch (SQLException e) {
+			System.err.println("Erreur lors de la récupération de l'utilisateur : " + e.getMessage());
+		}
+		return null;
+	}
+
+	// Vérifie si un utilisateur existe
 	public boolean isUserExist(String compte, String password) {
-	    String sql = "SELECT id_user FROM Utilisateur WHERE nom_compte = ? AND mot_de_passe = ?";
-	    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-	        stmt.setString(1, compte);
-	        stmt.setString(2, password);
-	        ResultSet rs = stmt.executeQuery();
+		String sql = "SELECT id_user FROM Utilisateur WHERE nom_compte = ? AND mot_de_passe = ?";
+		try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+			stmt.setString(1, compte);
+			stmt.setString(2, password);
+			ResultSet rs = stmt.executeQuery();
 
-	        return rs.next(); // retourne vrai si trouvé
+			return rs.next(); // retourne vrai si trouvé
 
-	    } catch (SQLException e) {
-	        System.err.println("Erreur lors de la vérification de l'utilisateur : " + e.getMessage());
-	    }
-	    return false;
+		} catch (SQLException e) {
+			System.err.println("Erreur lors de la vérification de l'utilisateur : " + e.getMessage());
+		}
+		return false;
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 import pfr.buycar.dao.UtilisateurDao;
-import pfr.buycar.dao.UtilisateurMock;
+import pfr.buycar.models.Client;
 import pfr.buycar.ui.AbstractMenu;
 import pfr.buycar.utils.Icons;
 
@@ -44,7 +44,7 @@ public class MenuConnexion extends AbstractMenu {
 		String mdp = scanner.nextLine().trim();
 
 		UtilisateurDao userDao = new UtilisateurDao(connection);
-		UtilisateurMock user = userDao.findByLogin(login);
+		Client user = userDao.findByLoginAndPassword(login, mdp);
 
 		if (user == null) {
 			System.out.println("\n" + Icons.ATTENTION + " Utilisateur inexistant !");

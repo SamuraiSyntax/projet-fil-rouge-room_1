@@ -20,7 +20,7 @@ public class MenuAdmin extends AbstractMenu {
 		this.userDao = new UtilisateurDao(connection);
 		this.voitureDao = new VoitureDao(connection);
 	}
-	
+
 	public static MenuAdmin getInstance(Scanner scanner, Connection connection) {
 		return new MenuAdmin(scanner, connection);
 	}
@@ -36,7 +36,7 @@ public class MenuAdmin extends AbstractMenu {
 	@Override
 	protected boolean traiterChoix(int choix) {
 		switch (choix) {
-		case 1 -> MenuAdminUtilisateur.getInstance(scanner).afficher();
+		case 1 -> MenuAdminUtilisateur.getInstance(scanner, connection).afficher();
 		case 2 -> MenuAdminVoiture.getInstance(scanner).afficher();
 		case 3 -> MenuAdminCommande.getInstance(scanner).afficher();
 		case 0 -> {
