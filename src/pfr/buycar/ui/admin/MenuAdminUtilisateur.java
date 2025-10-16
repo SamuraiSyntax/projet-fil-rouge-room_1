@@ -69,6 +69,11 @@ public class MenuAdminUtilisateur extends AbstractAdminMenu {
 	}
 
 	private void lister() {
+		UtilisateurDao user = new UtilisateurDao(connection);
+		List<Client> clients = user.getAll();
+		for (Client u : clients) {
+		    utilisateurs.add(u.toString());
+		}	
 		afficherListe(utilisateurs, "Aucun utilisateur enregistré.", "👥 Liste des utilisateurs :");
 	}
 
