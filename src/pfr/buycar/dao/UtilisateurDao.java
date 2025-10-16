@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import pfr.buycar.models.Client;
@@ -113,7 +114,52 @@ public class UtilisateurDao implements CRUDable<Client> {
 
 	@Override
 	public List<Client> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Client> clients = new ArrayList<>();
+		String sql = "SELECT * FROM Utilisateur";
+		
+		try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				Client client = new Client(
+						rs.getString("nom"),
+						rs.getString("prenom"),
+						rs.getString("nom_compte"),
+						rs.getString("mot_de_passe"),
+						rs.getInt("id_role"),
+						rs.getString("email")
+						);
+						client.setId(rs.getInt("id_user"));
+						clients.add(client);
+			}
+			
+			
+		} catch (SQLException e) {
+			System.out.println("Erreur lors de la récupération des utilisateurs : " + e.getMessage());
+		}
+		
+		return clients;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
