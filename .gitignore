@@ -1,0 +1,13 @@
+# Dossiers binaires
+/bin/
+/target/
+
+# Fichiers Eclipse
+.classpath
+.project
+.settings/
+
+# Fichiers systèmes
+*.log
+.DS_Store
+Thumbs.db
